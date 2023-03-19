@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class MoreView extends StatelessWidget {
+  const MoreView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'History',
+      'More',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     );
   }

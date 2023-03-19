@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MoreScreen extends StatelessWidget {
-  const MoreScreen({super.key});
+class BrowseView extends StatelessWidget {
+  const BrowseView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'More',
+      'Browse',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     );
   }
