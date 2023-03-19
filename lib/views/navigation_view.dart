@@ -3,6 +3,7 @@ import 'package:folio/views/browse_view.dart';
 import 'package:folio/views/history_view.dart';
 import 'package:folio/views/library_view.dart';
 import 'package:folio/views/more_view.dart';
+import 'package:go_router/go_router.dart';
 
 class Destination {
   final String label;
@@ -54,15 +55,7 @@ class _NavigationViewState extends State<NavigationView> {
     2: Destination(
       'Browse',
       const BrowseView(),
-      <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            icon: const Icon(Icons.travel_explore_outlined),
-            onPressed: () {},
-          ),
-        ),
-      ],
+      <Widget>[],
       const NavigationDestination(
         icon: Icon(Icons.explore_outlined),
         selectedIcon: Icon(Icons.explore),
@@ -87,7 +80,17 @@ class _NavigationViewState extends State<NavigationView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_destinations[_selectedIndex]!.label),
-        actions: _destinations[_selectedIndex]!.actions,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: const Icon(Icons.travel_explore_outlined),
+              onPressed: () {
+                context.go('/browseSearchView');
+              },
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: _destinations[_selectedIndex]!.view,
