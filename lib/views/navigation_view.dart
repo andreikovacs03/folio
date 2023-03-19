@@ -31,56 +31,33 @@ class _NavigationViewState extends State<NavigationView> {
     });
   }
 
-  final Map<int, Destination> _destinations = {
-    0: const Destination(
-      'Library',
-      LibraryView(),
-      <Widget>[],
-      NavigationDestination(
-        icon: Icon(Icons.collections_bookmark),
-        label: 'Library',
-        tooltip: "",
-      ),
-    ),
-    1: const Destination(
-      'History',
-      HistoryView(),
-      <Widget>[],
-      NavigationDestination(
-        icon: Icon(Icons.history),
-        label: 'History',
-        tooltip: "",
-      ),
-    ),
-    2: Destination(
-      'Browse',
-      const BrowseView(),
-      <Widget>[],
-      const NavigationDestination(
-        icon: Icon(Icons.explore_outlined),
-        selectedIcon: Icon(Icons.explore),
-        label: 'Browse',
-        tooltip: "",
-      ),
-    ),
-    3: const Destination(
-      'More',
-      MoreView(),
-      <Widget>[],
-      NavigationDestination(
-        icon: Icon(Icons.more_horiz),
-        label: 'More',
-        tooltip: "",
-      ),
-    ),
-  };
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_destinations[_selectedIndex]!.label),
-        actions: <Widget>[
+    final Map<int, Destination> destinations = {
+      0: const Destination(
+        'Library',
+        LibraryView(),
+        <Widget>[],
+        NavigationDestination(
+          icon: Icon(Icons.collections_bookmark),
+          label: 'Library',
+          tooltip: "",
+        ),
+      ),
+      1: const Destination(
+        'History',
+        HistoryView(),
+        <Widget>[],
+        NavigationDestination(
+          icon: Icon(Icons.history),
+          label: 'History',
+          tooltip: "",
+        ),
+      ),
+      2: Destination(
+        'Browse',
+        const BrowseView(),
+        <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
@@ -91,9 +68,32 @@ class _NavigationViewState extends State<NavigationView> {
             ),
           ),
         ],
+        const NavigationDestination(
+          icon: Icon(Icons.explore_outlined),
+          selectedIcon: Icon(Icons.explore),
+          label: 'Browse',
+          tooltip: "",
+        ),
+      ),
+      3: const Destination(
+        'More',
+        MoreView(),
+        <Widget>[],
+        NavigationDestination(
+          icon: Icon(Icons.more_horiz),
+          label: 'More',
+          tooltip: "",
+        ),
+      ),
+    };
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(destinations[_selectedIndex]!.label),
+        actions: destinations[_selectedIndex]!.actions,
       ),
       body: Center(
-        child: _destinations[_selectedIndex]!.view,
+        child: destinations[_selectedIndex]!.view,
       ),
       bottomNavigationBar: Builder(builder: (context) {
         return NavigationBarTheme(
@@ -104,7 +104,7 @@ class _NavigationViewState extends State<NavigationView> {
             selectedIndex: _selectedIndex,
             animationDuration: const Duration(seconds: 1),
             onDestinationSelected: _onDestinationSelected,
-            destinations: _destinations.values
+            destinations: destinations.values
                 .map((destination) => destination.navigationDestination)
                 .toList(),
           ),

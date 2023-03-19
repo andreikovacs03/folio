@@ -1,23 +1,63 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-import 'book.dart';
-import 'download.dart';
+part 'libgen_api.g.dart';
 
-@lazySingleton
-class LibgenAPI {
-  late Dio dio =
-      Dio(BaseOptions(baseUrl: 'https://folio-extensions.vercel.app/libgen'));
+@RestApi(baseUrl: 'https://folio-extensions.vercel.app/libgen/')
+abstract class LibgenAPI {
+  factory LibgenAPI(Dio dio, {String baseUrl}) = _LibgenAPI;
 
-  Future<Book?> searchTitle(String title) async {
-    final response = await dio.get<Book>('/search_title/$title');
+  @GET("/search_title/{title}")
+  Future<List<Book>> searchTitle(String title);
 
-    return response.data;
-  }
+  @GET("/download/{url}")
+  Future<Download> download(String url);
+}
 
-  Future<Download?> download(String url) async {
-    final response = await dio.get<Download>('/download/$url');
+@JsonSerializable(fieldRename: FieldRename.pascal)
+class Download {
+  final String? cloudflare;
+  final String? get;
+  final String? ipfts;
 
-    return response.data;
-  }
+  const Download({this.cloudflare, this.get, this.ipfts});
+
+  factory Download.fromJson(Map<String, dynamic> json) =>
+      _$DownloadFromJson(json);
+  Map<String, dynamic> toJson() => _$DownloadToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.pascal)
+class Book {
+  @JsonKey(name: 'ID')
+  final String id;
+  final String? author;
+  final String? title;
+  final String? pages;
+  final String? publisher;
+  final String? size;
+  final String? year;
+  final String? extension;
+  final String? language;
+  final String? mirror_1;
+  final String? mirror_2;
+  final String? mirror_3;
+
+  const Book(
+      {required this.id,
+      this.author,
+      this.title,
+      this.pages,
+      this.publisher,
+      this.size,
+      this.year,
+      this.extension,
+      this.language,
+      this.mirror_1,
+      this.mirror_2,
+      this.mirror_3});
+
+  factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
+  Map<String, dynamic> toJson() => _$BookToJson(this);
 }

@@ -11,19 +11,20 @@ void main() {
 final _router = GoRouter(
   routes: [
     GoRoute(
-      path: '/',
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const NavigationView(),
-      ),
-    ),
-    GoRoute(
-      path: '/browseSearchView',
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const BrowseSearchView(),
-      ),
-    ),
+        path: '/',
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const NavigationView(),
+            ),
+        routes: [
+          GoRoute(
+            path: 'browseSearchView',
+            pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const BrowseSearchView(),
+            ),
+          ),
+        ]),
   ],
 );
 
