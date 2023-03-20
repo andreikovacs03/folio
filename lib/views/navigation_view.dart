@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:folio/core/routes.dart';
 import 'package:folio/views/browse_view.dart';
 import 'package:folio/views/history_view.dart';
 import 'package:folio/views/library_view.dart';
 import 'package:folio/views/more_view.dart';
-import 'package:go_router/go_router.dart';
 
 class Destination {
   final String label;
@@ -63,7 +63,7 @@ class _NavigationViewState extends State<NavigationView> {
             child: IconButton(
               icon: const Icon(Icons.travel_explore_outlined),
               onPressed: () {
-                context.go('/browseSearchView');
+                BrowseSearchRoute().go(context);
               },
             ),
           ),

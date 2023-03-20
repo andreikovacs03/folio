@@ -65,6 +65,7 @@ class _BrowseSearchViewState extends State<BrowseSearchView> {
                     itemCount: books!.length,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.all(8),
+                    clipBehavior: Clip.antiAlias,
                     itemBuilder: (context, index) {
                       final book = books![index];
                       return Column(
