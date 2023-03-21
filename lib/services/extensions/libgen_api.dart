@@ -11,6 +11,9 @@ abstract class LibgenAPI {
   @GET("/search_title/{title}")
   Future<List<Book>> searchTitle(String title);
 
+  @POST("/search_title_filtered/{title}")
+  Future<List<Book>> searchTitleFiltered(String title, @Body() Filters filters);
+
   @GET("/download/{url}")
   Future<Download> download(String url);
 }
@@ -60,4 +63,45 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.pascal)
+class Filters {
+  @JsonKey(name: 'ID')
+  final String? id;
+  final String? author;
+  final String? title;
+  final String? publisher;
+  final String? year;
+  final String? pages;
+  final String? language;
+  final String? size;
+  final String? extension;
+  final String? mirror_1;
+  final String? mirror_2;
+  final String? mirror_3;
+  final String? mirror_4;
+  final String? mirror_5;
+  final String? edit;
+
+  const Filters(
+      {this.id,
+      this.author,
+      this.title,
+      this.publisher,
+      this.year,
+      this.pages,
+      this.language,
+      this.size,
+      this.extension,
+      this.mirror_1,
+      this.mirror_2,
+      this.mirror_3,
+      this.mirror_4,
+      this.mirror_5,
+      this.edit});
+
+  factory Filters.fromJson(Map<String, dynamic> json) =>
+      _$FiltersFromJson(json);
+  Map<String, dynamic> toJson() => _$FiltersToJson(this);
 }

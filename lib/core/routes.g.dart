@@ -17,6 +17,12 @@ GoRoute get $navigationRoute => GoRouteData.$route(
         GoRouteData.$route(
           path: 'browseSearch',
           factory: $BrowseSearchRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'book',
+              factory: $BookRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     );
@@ -50,4 +56,21 @@ extension $BrowseSearchRouteExtension on BrowseSearchRoute {
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+}
+
+extension $BookRouteExtension on BookRoute {
+  static BookRoute _fromState(GoRouterState state) => BookRoute(
+        $extra: state.extra as Book?,
+      );
+
+  String get location => GoRouteData.$location(
+        '/browseSearch/book',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  void push(BuildContext context) => context.push(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
 }

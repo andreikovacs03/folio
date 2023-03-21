@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:folio/core/routes.dart';
 import 'package:folio/services/extensions/libgen_api.dart';
+import 'package:folio/views/book_view.dart';
 import 'package:go_router/go_router.dart';
 
 class BrowseSearchView extends StatefulWidget {
@@ -68,34 +70,37 @@ class _BrowseSearchViewState extends State<BrowseSearchView> {
                     clipBehavior: Clip.antiAlias,
                     itemBuilder: (context, index) {
                       final book = books![index];
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Center(
-                                  child: Image.network(
-                                      height: 80,
-                                      width: 95,
-                                      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png")),
-                            ),
-                          ),
-                          ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 95, maxHeight: 40),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                      return GestureDetector(
+                        onTap: () => BookRoute($extra: book).go(context),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
                                 child: Center(
-                                    child: Text(
-                                  book.title ?? "Missing title",
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  style: const TextStyle(fontSize: 12),
+                                    child: Image.network(
+                                        height: 80,
+                                        width: 95,
+                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png")),
+                              ),
+                            ),
+                            ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 95, maxHeight: 40),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  child: Center(
+                                      child: Text(
+                                    book.title ?? "Missing title",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                    style: const TextStyle(fontSize: 12),
+                                  )),
                                 )),
-                              )),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),
