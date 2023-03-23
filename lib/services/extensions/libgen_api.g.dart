@@ -116,7 +116,7 @@ class _LibgenAPI implements LibgenAPI {
     )
             .compose(
               _dio.options,
-              '/search_title/{title}',
+              '/search_title/${title}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -145,7 +145,7 @@ class _LibgenAPI implements LibgenAPI {
     )
             .compose(
               _dio.options,
-              '/search_title_filtered/{title}',
+              '/search_title_filtered/${title}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -157,20 +157,21 @@ class _LibgenAPI implements LibgenAPI {
   }
 
   @override
-  Future<Download> download(url) async {
+  Future<Download> download(link) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = {'link': link};
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Download>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'application/x-www-form-urlencoded',
     )
             .compose(
               _dio.options,
-              '/download/{url}',
+              '/download/',
               queryParameters: queryParameters,
               data: _data,
             )

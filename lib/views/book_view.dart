@@ -1,15 +1,29 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
 
 class BookView extends StatelessWidget {
-  final Book book;
+  final String? mirror_1;
+  final String? title;
+  final String? author;
 
-  const BookView({required this.book, super.key});
+  const BookView({super.key, this.mirror_1, this.title, this.author});
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onRead() async {
+      final libgenApi = LibgenAPI(Dio());
+      final download = await libgenApi.download(mirror_1!);
+
+      if (download.cloudflare != null) {
+        // ignore: use_build_context_synchronously
+        PdfRoute(download.cloudflare!).go(context);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -46,11 +60,11 @@ class BookView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            book.title ?? "Missing title",
+                            title ?? "Missing title",
                             style: const TextStyle(fontSize: 17),
                           ),
                           Text(
-                            book.author ?? "Missing author",
+                            author ?? "Missing author",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
@@ -73,8 +87,8 @@ class BookView extends StatelessWidget {
                           // shape: const RoundedRectangleBorder(
                           //     borderRadius: BorderRadius.zero),
                           minimumSize: const Size.fromHeight(50)),
-                      onPressed: () {},
-                      child: const Text('Download'),
+                      onPressed: () => onRead(),
+                      child: const Text('Read'),
                     );
                   },
                 ),

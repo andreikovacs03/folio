@@ -9,13 +9,15 @@ abstract class LibgenAPI {
   factory LibgenAPI(Dio dio, {String baseUrl}) = _LibgenAPI;
 
   @GET("/search_title/{title}")
-  Future<List<Book>> searchTitle(String title);
+  Future<List<Book>> searchTitle(@Path("title") String title);
 
   @POST("/search_title_filtered/{title}")
-  Future<List<Book>> searchTitleFiltered(String title, @Body() Filters filters);
+  Future<List<Book>> searchTitleFiltered(
+      @Path("title") String title, @Body() Filters filters);
 
-  @GET("/download/{url}")
-  Future<Download> download(String url);
+  @POST("/download/")
+  @FormUrlEncoded()
+  Future<Download> download(@Field() String link);
 }
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
