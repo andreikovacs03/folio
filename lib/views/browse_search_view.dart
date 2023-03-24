@@ -119,28 +119,32 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
                                 Expanded(
                                   child: Card(
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
                                     child: Center(
-                                        child: Image.network(
-                                            height: 80,
-                                            width: 95,
-                                            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png")),
+                                      child: Image.network(
+                                          height: 80,
+                                          width: 95,
+                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png"),
+                                    ),
                                   ),
                                 ),
                                 ConstrainedBox(
-                                    constraints: const BoxConstraints(
-                                        maxWidth: 95, maxHeight: 40),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      child: Center(
-                                          child: Text(
+                                  constraints: const BoxConstraints(
+                                      maxWidth: 95, maxHeight: 40),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Center(
+                                      child: Text(
                                         book.title ?? "Missing title",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                         style: const TextStyle(fontSize: 12),
-                                      )),
-                                    )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           );

@@ -41,15 +41,20 @@ class BookView extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(
-                          minWidth: 120, maxHeight: 165, maxWidth: 120),
+                        minWidth: 120,
+                        maxHeight: 165,
+                        maxWidth: 120,
+                      ),
                       child: Card(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Center(
-                            child: Image.network(
-                                height: 100,
-                                width: 95,
-                                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png")),
+                          child: Image.network(
+                              height: 100,
+                              width: 95,
+                              "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png"),
+                        ),
                       ),
                     ),
                   ),
@@ -68,9 +73,10 @@ class BookView extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                foreground: Paint()..color = Colors.white70),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              foreground: Paint()..color = Colors.white70,
+                            ),
                           ),
                         ],
                       ),
@@ -78,17 +84,70 @@ class BookView extends StatelessWidget {
                   ),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white54,
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        surfaceTintColor: Colors.transparent,
+                        padding: const EdgeInsets.all(16),
+                      ),
+                      statesController: MaterialStatesController(),
+                      onPressed: () => {},
+                      child: Column(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 4),
+                            child: Icon(Icons.favorite_border),
+                          ),
+                          Text('Add to library'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white54,
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        surfaceTintColor: Colors.transparent,
+                        padding: const EdgeInsets.all(16),
+                      ),
+                      statesController: MaterialStatesController(),
+                      onPressed: () => {},
+                      child: Column(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 4),
+                            child: Icon(Icons.public),
+                          ),
+                          Text('Open in browser'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: 1,
                   itemBuilder: (context, index) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
                           // shape: const RoundedRectangleBorder(
                           //     borderRadius: BorderRadius.zero),
-                          minimumSize: const Size.fromHeight(50)),
-                      onPressed: () => onRead(),
-                      child: const Text('Read'),
+                          minimumSize: const Size.fromHeight(50),
+                        ),
+                        onPressed: () => onRead(),
+                        child: const Text('Read'),
+                      ),
                     );
                   },
                 ),
