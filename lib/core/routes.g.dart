@@ -66,6 +66,7 @@ extension $BrowseSearchRouteExtension on BrowseSearchRoute {
 
 extension $BookRouteExtension on BookRoute {
   static BookRoute _fromState(GoRouterState state) => BookRoute(
+        id: state.queryParams['id'],
         title: state.queryParams['title'],
         author: state.queryParams['author'],
         mirror_1: state.queryParams['mirror_1'],
@@ -74,6 +75,7 @@ extension $BookRouteExtension on BookRoute {
   String get location => GoRouteData.$location(
         '/browseSearch/book',
         queryParams: {
+          if (id != null) 'id': id,
           if (title != null) 'title': title,
           if (author != null) 'author': author,
           if (mirror_1 != null) 'mirror_1': mirror_1,

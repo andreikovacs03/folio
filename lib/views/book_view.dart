@@ -5,18 +5,19 @@ import 'package:go_router/go_router.dart';
 import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
 
-class BookView extends StatelessWidget {
-  final String? mirror_1;
-  final String? title;
-  final String? author;
+// ignore: must_be_immutable
+class BookView extends StatelessWidget  {
+  late Book book;
 
-  const BookView({super.key, this.mirror_1, this.title, this.author});
+  BookView({super.key, Book? book}) {
+    this.book = book!;
+  }
 
   @override
   Widget build(BuildContext context) {
     Future<void> onRead() async {
       final libgenApi = LibgenAPI(Dio());
-      final download = await libgenApi.download(mirror_1!);
+      final download = await libgenApi.download(book!.mirror_1!);
 
       if (download.cloudflare != null) {
         // ignore: use_build_context_synchronously
@@ -65,11 +66,11 @@ class BookView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            title ?? "Missing title",
+                            book.title ?? "Missing title",
                             style: const TextStyle(fontSize: 17),
                           ),
                           Text(
-                            author ?? "Missing author",
+                            book.author ?? "Missing author",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(

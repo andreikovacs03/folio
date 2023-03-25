@@ -36,32 +36,39 @@ class Download {
 @JsonSerializable(fieldRename: FieldRename.pascal)
 class Book {
   @JsonKey(name: 'ID')
-  final String id;
+  final String? id;
   final String? author;
   final String? title;
-  final String? pages;
   final String? publisher;
-  final String? size;
   final String? year;
-  final String? extension;
+  final String? pages;
   final String? language;
+  final String? size;
+  final String? extension;
   final String? mirror_1;
   final String? mirror_2;
   final String? mirror_3;
+  final String? mirror_4;
+  final String? mirror_5;
+  final String? edit;
 
-  const Book(
-      {required this.id,
-      this.author,
-      this.title,
-      this.pages,
-      this.publisher,
-      this.size,
-      this.year,
-      this.extension,
-      this.language,
-      this.mirror_1,
-      this.mirror_2,
-      this.mirror_3});
+  const Book({
+    this.id,
+    this.author,
+    this.title,
+    this.pages,
+    this.publisher,
+    this.size,
+    this.year,
+    this.extension,
+    this.language,
+    this.mirror_1,
+    this.mirror_2,
+    this.mirror_3,
+    this.mirror_4,
+    this.mirror_5,
+    this.edit,
+  });
 
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
   Map<String, dynamic> toJson() => _$BookToJson(this);

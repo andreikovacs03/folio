@@ -49,6 +49,7 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
   Widget build(BuildContext context) {
     void viewBook(Book book) {
       BookRoute(
+        id: book.id,
         title: book.title,
         author: book.author,
         mirror_1: book.mirror_1,
