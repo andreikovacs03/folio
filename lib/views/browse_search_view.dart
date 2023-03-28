@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:folio/core/routes.dart';
-import 'package:folio/services/extensions/libgen_api.dart';
 import 'package:go_router/go_router.dart';
+
+import '../services/extensions/libgen_api.dart';
+import '../services/extensions/models.dart';
 
 class BrowseSearchView extends StatefulWidget {
   const BrowseSearchView({super.key});
@@ -49,7 +51,7 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
   Widget build(BuildContext context) {
     void viewBook(Book book) {
       BookRoute(
-        id: book.id,
+        id: book.extId,
         title: book.title,
         author: book.author,
         mirror_1: book.mirror_1,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:folio/views/pdf_view.dart';
 import 'package:go_router/go_router.dart';
 
-import '../services/extensions/libgen_api.dart';
+import '../services/extensions/models.dart';
 import '../views/book_view.dart';
 import '../views/browse_search_view.dart';
 import '../views/navigation_view.dart';
@@ -56,7 +56,8 @@ class BookRoute extends GoRouteData {
       NoTransitionPage<void>(
         key: _key,
         child: BookView(
-          book: Book(id: id, title: title, author: author, mirror_1: mirror_1),
+          book:
+              Book(extId: id, title: title, author: author, mirror_1: mirror_1),
         ),
       );
 }

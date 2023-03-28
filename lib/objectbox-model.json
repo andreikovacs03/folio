@@ -1,0 +1,107 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5779438059364853228",
+      "lastPropertyId": "16:7271485354315500598",
+      "name": "Book",
+      "properties": [
+        {
+          "id": "1:7223687085568733421",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5192459096821355931",
+          "name": "extId",
+          "type": 9
+        },
+        {
+          "id": "3:5849868966234400527",
+          "name": "author",
+          "type": 9
+        },
+        {
+          "id": "4:5085135343961939909",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:6828822639573428484",
+          "name": "publisher",
+          "type": 9
+        },
+        {
+          "id": "6:1321928675957678205",
+          "name": "year",
+          "type": 9
+        },
+        {
+          "id": "7:1391171833556549060",
+          "name": "pages",
+          "type": 9
+        },
+        {
+          "id": "8:7927751527879121574",
+          "name": "language",
+          "type": 9
+        },
+        {
+          "id": "9:5459323639359726095",
+          "name": "size",
+          "type": 9
+        },
+        {
+          "id": "10:2248560395270830992",
+          "name": "extension",
+          "type": 9
+        },
+        {
+          "id": "11:2229279629448494164",
+          "name": "mirror_1",
+          "type": 9
+        },
+        {
+          "id": "12:1893716289953815630",
+          "name": "mirror_2",
+          "type": 9
+        },
+        {
+          "id": "13:2608838860837017769",
+          "name": "mirror_3",
+          "type": 9
+        },
+        {
+          "id": "14:33648458249800469",
+          "name": "mirror_4",
+          "type": 9
+        },
+        {
+          "id": "15:5711739170695402997",
+          "name": "mirror_5",
+          "type": 9
+        },
+        {
+          "id": "16:7271485354315500598",
+          "name": "edit",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:5779438059364853228",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

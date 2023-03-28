@@ -4,9 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
+import '../services/extensions/models.dart';
 
 // ignore: must_be_immutable
-class BookView extends StatelessWidget  {
+class BookView extends StatelessWidget {
   late Book book;
 
   BookView({super.key, Book? book}) {
