@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:objectbox/objectbox.dart';
 
 part 'models.g.dart';
 
@@ -16,10 +15,8 @@ class Download {
   Map<String, dynamic> toJson() => _$DownloadToJson(this);
 }
 
-@Entity()
 @JsonSerializable(fieldRename: FieldRename.pascal)
 class Book {
-  @Id()
   int id = 0;
 
   @JsonKey(name: 'ID')
