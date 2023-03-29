@@ -15,6 +15,10 @@ GoRoute get $navigationRoute => GoRouteData.$route(
       factory: $NavigationRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
+          path: 'favoriteBook',
+          factory: $FavoriteBookRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'browseSearch',
           factory: $BrowseSearchRouteExtension._fromState,
           routes: [
@@ -38,6 +42,32 @@ extension $NavigationRouteExtension on NavigationRoute {
 
   String get location => GoRouteData.$location(
         '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $FavoriteBookRouteExtension on FavoriteBookRoute {
+  static FavoriteBookRoute _fromState(GoRouterState state) => FavoriteBookRoute(
+        id: state.queryParams['id'],
+        title: state.queryParams['title'],
+        author: state.queryParams['author'],
+        mirror_1: state.queryParams['mirror_1'],
+      );
+
+  String get location => GoRouteData.$location(
+        '/favoriteBook',
+        queryParams: {
+          if (id != null) 'id': id,
+          if (title != null) 'title': title,
+          if (author != null) 'author': author,
+          if (mirror_1 != null) 'mirror_1': mirror_1,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

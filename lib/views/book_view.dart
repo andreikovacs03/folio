@@ -1,24 +1,50 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
 import '../services/extensions/models.dart';
 
-// ignore: must_be_immutable
-class BookView extends StatelessWidget {
-  late Book book;
+class BookView extends StatefulWidget {
+  late final Book book;
 
   BookView({super.key, Book? book}) {
     this.book = book!;
   }
 
   @override
+  State<BookView> createState() => _BookViewState();
+}
+
+class _BookViewState extends State<BookView> {
+  late bool isFavorite;
+  late final FavoritesAPI _favoritesAPI;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _favoritesAPI = FavoritesAPI();
+    isFavorite = _favoritesAPI.isFavorite(widget.book);
+  }
+
+  onFavorite() async {
+    _favoritesAPI.upsertFavoriteBook(widget.book);
+    setState(() => isFavorite = true);
+  }
+
+  onUnfavorite() async {
+    _favoritesAPI.removeFavoriteBook(widget.book);
+    setState(() => isFavorite = false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     Future<void> onRead() async {
       final libgenApi = LibgenAPI(Dio());
-      final download = await libgenApi.download(book!.mirror_1!);
+      final download = await libgenApi.download(widget.book.mirror_1!);
 
       if (download.cloudflare != null) {
         // ignore: use_build_context_synchronously
@@ -67,11 +93,11 @@ class BookView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            book.title ?? "Missing title",
+                            widget.book.title ?? "Missing title",
                             style: const TextStyle(fontSize: 17),
                           ),
                           Text(
-                            book.author ?? "Missing author",
+                            widget.book.author ?? "Missing author",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                             style: TextStyle(
@@ -92,21 +118,24 @@ class BookView extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white54,
+                        foregroundColor: isFavorite ? null : Colors.white54,
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                         surfaceTintColor: Colors.transparent,
                         padding: const EdgeInsets.all(16),
                       ),
                       statesController: MaterialStatesController(),
-                      onPressed: () => {},
+                      onPressed: () =>
+                          isFavorite ? onUnfavorite() : onFavorite(),
                       child: Column(
-                        children: const [
+                        children: [
                           Padding(
-                            padding: EdgeInsets.only(bottom: 4),
-                            child: Icon(Icons.favorite_border),
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Icon(isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border),
                           ),
-                          Text('Add to library'),
+                          Text(isFavorite ? 'In library' : 'Add to library'),
                         ],
                       ),
                     ),

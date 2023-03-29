@@ -5,9 +5,11 @@ class HistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'History',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+    return const Center(
+      child: Text(
+        'History',
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

@@ -10,6 +10,7 @@ import '../views/navigation_view.dart';
 part 'routes.g.dart';
 
 @TypedGoRoute<NavigationRoute>(path: '/', routes: [
+  TypedGoRoute<FavoriteBookRoute>(path: 'favoriteBook'),
   TypedGoRoute<BrowseSearchRoute>(
     path: 'browseSearch',
     routes: [
@@ -56,8 +57,26 @@ class BookRoute extends GoRouteData {
       NoTransitionPage<void>(
         key: _key,
         child: BookView(
-          book:
-              Book(extId: id, title: title, author: author, mirror_1: mirror_1),
+          book: Book(id: id, title: title, author: author, mirror_1: mirror_1),
+        ),
+      );
+}
+
+class FavoriteBookRoute extends GoRouteData {
+  static const _key = ValueKey("/favoriteBook");
+  final String? id;
+  final String? title;
+  final String? author;
+  final String? mirror_1;
+
+  FavoriteBookRoute({this.id, this.title, this.author, this.mirror_1});
+
+  @override
+  NoTransitionPage<void> buildPage(BuildContext context, GoRouterState state) =>
+      NoTransitionPage<void>(
+        key: _key,
+        child: BookView(
+          book: Book(id: id, title: title, author: author, mirror_1: mirror_1),
         ),
       );
 }

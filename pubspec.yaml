@@ -44,6 +44,7 @@ dependencies:
   build_verify: ^3.1.0
   syncfusion_flutter_pdfviewer: ^20.4.54
   shared_preferences: ^2.0.20
+  injectable: ^2.1.1
 
 dev_dependencies:
   flutter_test:

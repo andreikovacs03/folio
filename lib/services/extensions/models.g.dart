@@ -19,7 +19,7 @@ Map<String, dynamic> _$DownloadToJson(Download instance) => <String, dynamic>{
     };
 
 Book _$BookFromJson(Map<String, dynamic> json) => Book(
-      extId: json['ID'] as String?,
+      id: json['ID'] as String?,
       author: json['Author'] as String?,
       title: json['Title'] as String?,
       pages: json['Pages'] as String?,
@@ -34,11 +34,10 @@ Book _$BookFromJson(Map<String, dynamic> json) => Book(
       mirror_4: json['Mirror_4'] as String?,
       mirror_5: json['Mirror_5'] as String?,
       edit: json['Edit'] as String?,
-    )..id = json['Id'] as int;
+    );
 
 Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
-      'Id': instance.id,
-      'ID': instance.extId,
+      'ID': instance.id,
       'Author': instance.author,
       'Title': instance.title,
       'Publisher': instance.publisher,

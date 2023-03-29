@@ -34,11 +34,11 @@ class _NavigationViewState extends State<NavigationView> {
   @override
   Widget build(BuildContext context) {
     final Map<int, Destination> destinations = {
-      0: const Destination(
+      0: Destination(
         'Library',
         LibraryView(),
         <Widget>[],
-        NavigationDestination(
+        const NavigationDestination(
           icon: Icon(Icons.collections_bookmark),
           label: 'Library',
           tooltip: "",
@@ -92,9 +92,7 @@ class _NavigationViewState extends State<NavigationView> {
         title: Text(destinations[_selectedIndex]!.label),
         actions: destinations[_selectedIndex]!.actions,
       ),
-      body: Center(
-        child: destinations[_selectedIndex]!.view,
-      ),
+      body: destinations[_selectedIndex]!.view,
       bottomNavigationBar: Builder(builder: (context) {
         return NavigationBarTheme(
           data: NavigationBarThemeData(

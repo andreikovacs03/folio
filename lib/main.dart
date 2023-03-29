@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
 
 import 'core/routes.dart';
 
-void main() {
+void main() async {
+  await FavoritesAPI().init();
+
   runApp(const MyApp());
 }
 

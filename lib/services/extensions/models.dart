@@ -17,10 +17,8 @@ class Download {
 
 @JsonSerializable(fieldRename: FieldRename.pascal)
 class Book {
-  int id = 0;
-
   @JsonKey(name: 'ID')
-  final String? extId;
+  final String? id;
   final String? author;
   final String? title;
   final String? publisher;
@@ -37,7 +35,7 @@ class Book {
   final String? edit;
 
   Book({
-    this.extId,
+    this.id,
     this.author,
     this.title,
     this.pages,
