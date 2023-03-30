@@ -46,12 +46,31 @@ class LibraryView extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(
-                      child: Image.network(
-                        height: 170,
-                        width: 185,
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png",
-                      ),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Center(
+                          child: Image.network(
+                            height: 170,
+                            width: 185,
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png",
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              book.title ?? "Missing title",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 );
