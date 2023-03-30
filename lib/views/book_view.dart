@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
@@ -38,6 +40,26 @@ class _BookViewState extends State<BookView> {
   onUnfavorite() async {
     _favoritesAPI.removeFavoriteBook(widget.book);
     setState(() => isFavorite = false);
+  }
+
+  onOpenInBrowser() async {
+    var logger = Logger();
+
+    try {
+      final uri = Uri.parse(Uri.encodeFull(widget.book.mirror_1 ??
+          widget.book.mirror_2 ??
+          widget.book.mirror_3 ??
+          widget.book.mirror_4 ??
+          widget.book.mirror_5!));
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        logger.e("Could not launch ${uri.toString()}");
+      }
+    } catch (e) {
+      logger.e(e);
+    }
   }
 
   @override
@@ -150,7 +172,7 @@ class _BookViewState extends State<BookView> {
                         padding: const EdgeInsets.all(16),
                       ),
                       statesController: MaterialStatesController(),
-                      onPressed: () => {},
+                      onPressed: () => onOpenInBrowser(),
                       child: Column(
                         children: const [
                           Padding(
