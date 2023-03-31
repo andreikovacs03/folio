@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,12 +19,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      title: 'Folio',
-      theme: ThemeData.light(useMaterial3: true),
-      darkTheme: ThemeData.dark(useMaterial3: true),
-      debugShowCheckedModeBanner: false,
+    return FlutterWebFrame(
+      builder: (context) {
+        return MaterialApp.router(
+          routerConfig: _router,
+          title: 'Folio',
+          theme: ThemeData.light(useMaterial3: true),
+          darkTheme: ThemeData.dark(useMaterial3: true),
+          debugShowCheckedModeBanner: false,
+        );
+      },
+      maximumSize: const Size(475.0, 812.0),
+      enabled: kIsWeb,
+      backgroundColor: Colors.grey,
     );
   }
 }
