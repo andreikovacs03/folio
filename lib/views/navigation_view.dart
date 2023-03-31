@@ -75,16 +75,16 @@ class _NavigationViewState extends State<NavigationView> {
           tooltip: "",
         ),
       ),
-      3: const Destination(
-        'More',
-        MoreView(),
-        <Widget>[],
-        NavigationDestination(
-          icon: Icon(Icons.more_horiz),
-          label: 'More',
-          tooltip: "",
-        ),
-      ),
+      // 3: const Destination(
+      //   'More',
+      //   MoreView(),
+      //   <Widget>[],
+      //   NavigationDestination(
+      //     icon: Icon(Icons.more_horiz),
+      //     label: 'More',
+      //     tooltip: "",
+      //   ),
+      // ),
     };
 
     return Scaffold(
