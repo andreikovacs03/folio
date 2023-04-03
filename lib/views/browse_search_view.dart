@@ -16,36 +16,25 @@ class BrowseSearchView extends StatefulWidget {
 class _BrowseSearchViewState extends State<BrowseSearchView>
     with TickerProviderStateMixin {
   String title = "";
+  bool isLoading = false;
   List<Book>? books;
-  // late AnimationController controller;
+  late AnimationController controller;
 
   Future<void> _onSubmitted(String value) async {
-    setState(() => title = value);
+    setState(() {
+      title = value;
+      isLoading = true;
+    });
 
     final libgenApi = LibgenAPI(Dio());
     try {
       final books = await libgenApi.searchTitle(value);
-      setState(() => this.books = books);
+      setState(() {
+        this.books = books;
+        isLoading = false;
+      });
     } catch (e) {}
   }
-
-  // @override
-  // void initState() {
-  //   controller = AnimationController(
-  //     vsync: this,
-  //     duration: const Duration(seconds: 5),
-  //   )..addListener(() {
-  //       setState(() {});
-  //     });
-  //   controller.repeat(reverse: true);
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +72,13 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
           ],
         ),
         body: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          // LinearProgressIndicator(
-          //   value: controller.value,
-          //   semanticsLabel: 'Loading progress',
-          // ),
+          isLoading
+              ? const LinearProgressIndicator(
+                  semanticsLabel: 'Loading progress',
+                )
+              : Container(),
           books == null
-              ? const Center()
+              ? Container()
               : Column(
                   children: [
                     const Align(
