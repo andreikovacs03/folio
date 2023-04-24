@@ -146,7 +146,9 @@ class _BookPageViewState extends State<BookPageView> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: isFavorite ? null : Colors.white54,
+                        foregroundColor: isFavorite
+                            ? null
+                            : Theme.of(context).textTheme.bodyLarge!.color,
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                         surfaceTintColor: Colors.transparent,
@@ -171,7 +173,8 @@ class _BookPageViewState extends State<BookPageView> {
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white54,
+                        foregroundColor:
+                            Theme.of(context).textTheme.bodyLarge!.color,
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
                         surfaceTintColor: Colors.transparent,
