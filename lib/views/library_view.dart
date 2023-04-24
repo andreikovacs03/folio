@@ -57,13 +57,15 @@ class LibraryView extends StatelessWidget {
                     itemCount: books.length,
                     itemBuilder: (context, index) {
                       final book = books[index];
-                      return GestureDetector(
-                        onTap: () => viewBook(book),
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                      return Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () => viewBook(book),
                           child: Stack(
                             fit: StackFit.expand,
                             children: [

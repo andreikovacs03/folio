@@ -19,6 +19,10 @@ GoRoute get $navigationRoute => GoRouteData.$route(
           factory: $FavoriteBookRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'historyBook',
+          factory: $HistoryBookRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'browseSearch',
           factory: $BrowseSearchRouteExtension._fromState,
           routes: [
@@ -62,6 +66,32 @@ extension $FavoriteBookRouteExtension on FavoriteBookRoute {
 
   String get location => GoRouteData.$location(
         '/favoriteBook',
+        queryParams: {
+          if (id != null) 'id': id,
+          if (title != null) 'title': title,
+          if (author != null) 'author': author,
+          if (mirror_1 != null) 'mirror_1': mirror_1,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $HistoryBookRouteExtension on HistoryBookRoute {
+  static HistoryBookRoute _fromState(GoRouterState state) => HistoryBookRoute(
+        id: state.queryParams['id'],
+        title: state.queryParams['title'],
+        author: state.queryParams['author'],
+        mirror_1: state.queryParams['mirror_1'],
+      );
+
+  String get location => GoRouteData.$location(
+        '/historyBook',
         queryParams: {
           if (id != null) 'id': id,
           if (title != null) 'title': title,

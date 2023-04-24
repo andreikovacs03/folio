@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:folio/services/book_view_api.dart';
 import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
@@ -9,26 +10,28 @@ import '../core/routes.dart';
 import '../services/extensions/libgen_api.dart';
 import '../services/extensions/models.dart';
 
-class BookView extends StatefulWidget {
+class BookPageView extends StatefulWidget {
   late final Book book;
 
-  BookView({super.key, Book? book}) {
+  BookPageView({super.key, Book? book}) {
     this.book = book!;
   }
 
   @override
-  State<BookView> createState() => _BookViewState();
+  State<BookPageView> createState() => _BookPageViewState();
 }
 
-class _BookViewState extends State<BookView> {
+class _BookPageViewState extends State<BookPageView> {
   late bool isFavorite;
   late final FavoritesAPI _favoritesAPI;
+  late final BookViewAPI _bookViewAPI;
 
   @override
   void initState() {
     super.initState();
 
     _favoritesAPI = FavoritesAPI();
+    _bookViewAPI = BookViewAPI();
     isFavorite = _favoritesAPI.isFavorite(widget.book);
   }
 
@@ -67,6 +70,9 @@ class _BookViewState extends State<BookView> {
     Future<void> onRead() async {
       final libgenApi = LibgenAPI(Dio());
       final download = await libgenApi.download(widget.book.mirror_1!);
+
+      _bookViewAPI
+          .upsertBookView(BookView(book: widget.book, date: DateTime.now()));
 
       if (download.cloudflare != null) {
         // ignore: use_build_context_synchronously

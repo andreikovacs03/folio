@@ -96,3 +96,15 @@ class Filters {
       _$FiltersFromJson(json);
   Map<String, dynamic> toJson() => _$FiltersToJson(this);
 }
+
+@JsonSerializable(fieldRename: FieldRename.pascal)
+class BookView {
+  final Book book;
+  final DateTime date;
+
+  const BookView({required this.book, required this.date});
+
+  factory BookView.fromJson(Map<String, dynamic> json) =>
+      _$BookViewFromJson(json);
+  Map<String, dynamic> toJson() => _$BookViewToJson(this);
+}

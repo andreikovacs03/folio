@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:folio/services/favorites_api.dart';
+import 'package:folio/services/book_view_api.dart';
 import 'package:go_router/go_router.dart';
 
 import 'core/routes.dart';
 
 void main() async {
   await FavoritesAPI().init();
+  await BookViewAPI().init();
 
   runApp(const MyApp());
 }

@@ -89,3 +89,13 @@ Map<String, dynamic> _$FiltersToJson(Filters instance) => <String, dynamic>{
       'Mirror_5': instance.mirror_5,
       'Edit': instance.edit,
     };
+
+BookView _$BookViewFromJson(Map<String, dynamic> json) => BookView(
+      book: Book.fromJson(json['Book'] as Map<String, dynamic>),
+      date: DateTime.parse(json['Date'] as String),
+    );
+
+Map<String, dynamic> _$BookViewToJson(BookView instance) => <String, dynamic>{
+      'Book': instance.book,
+      'Date': instance.date.toIso8601String(),
+    };

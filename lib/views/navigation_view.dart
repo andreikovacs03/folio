@@ -44,11 +44,11 @@ class _NavigationViewState extends State<NavigationView> {
           tooltip: "",
         ),
       ),
-      1: const Destination(
+      1: Destination(
         'History',
         HistoryView(),
         <Widget>[],
-        NavigationDestination(
+        const NavigationDestination(
           icon: Icon(Icons.history),
           label: 'History',
           tooltip: "",
