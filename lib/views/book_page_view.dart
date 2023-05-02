@@ -25,6 +25,8 @@ class _BookPageViewState extends State<BookPageView> {
   late bool isFavorite;
   late final FavoritesAPI _favoritesAPI;
   late final BookViewAPI _bookViewAPI;
+  late final supportedFileFormat =
+      widget.book.extension != null && widget.book.extension != 'pdf';
 
   @override
   void initState() {
@@ -214,8 +216,10 @@ class _BookPageViewState extends State<BookPageView> {
                           //     borderRadius: BorderRadius.zero),
                           minimumSize: const Size.fromHeight(50),
                         ),
-                        onPressed: () => onRead(),
-                        child: const Text('Read'),
+                        onPressed: supportedFileFormat ? null : () => onRead(),
+                        child: Text(supportedFileFormat
+                            ? 'Unsupported file type'
+                            : 'Read'),
                       ),
                     );
                   },
