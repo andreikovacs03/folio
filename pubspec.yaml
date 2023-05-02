@@ -50,6 +50,7 @@ dependencies:
   flutter_web_frame: ^0.0.3
   collection: ^1.17.0
   intl: ^0.18.1
+  flutter_downloader: ^1.10.2
 
 dev_dependencies:
   flutter_test:

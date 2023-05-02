@@ -21,14 +21,14 @@ class _LibgenAPI2 implements LibgenAPI2 {
   String? baseUrl;
 
   @override
-  Future<String> search({
-    required req,
+  Future<String> search(
+    req,
     open,
     res,
     view,
     phase,
-    required column,
-  }) async {
+    column,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'req': req,

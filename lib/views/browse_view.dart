@@ -12,9 +12,13 @@ class BrowseView extends StatefulWidget {
 
 class _BrowseViewState extends State<BrowseView> {
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    print(await LibgenAPI2(Dio()).search(req: "hello"));
+    search();
+  }
+
+  Future<void> search() async {
+    // print(await LibgenAPI2(Dio()).search('test', null, null, null, null, null));
   }
 
   @override
