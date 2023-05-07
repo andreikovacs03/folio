@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:folio/services/book_view_api.dart';
 import 'package:folio/services/favorites_api.dart';
 import 'package:go_router/go_router.dart';
@@ -78,6 +79,15 @@ class _BookPageViewState extends State<BookPageView> {
 
       if (download.cloudflare != null) {
         // ignore: use_build_context_synchronously
+
+        // final taskId = await FlutterDownloader.enqueue(
+        //     url: download.cloudflare!,
+        //     savedDir: 'downloads',
+        //     showNotification: true,
+        //     openFileFromNotification: true);
+
+        // FlutterDownloader.open(taskId: taskId!);
+
         PdfRoute(download.cloudflare!).go(context);
       }
     }
