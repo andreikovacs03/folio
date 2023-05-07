@@ -35,96 +35,120 @@ class _HistoryViewState extends State<HistoryView> {
           bookViewsGroupedByDate = _bookViewAPI.getBookViewsGroupedByDate());
     }
 
-    return ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-      child: ListView.builder(
-        itemCount: bookViewsGroupedByDate.length,
-        itemBuilder: (context, index) {
-          final date = bookViewsGroupedByDate.keys.elementAt(index);
-          final bookViews = bookViewsGroupedByDate[date];
-
-          return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Text(
-                    DateFormat('dd/MM/yyyy').format(date),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+    return bookViewsGroupedByDate.isEmpty
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "No books in your history",
+                  style: TextStyle(fontSize: 16),
                 ),
-                ...bookViews!
-                    .map(
-                      (bookView) => ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor:
-                              Theme.of(context).textTheme.bodyLarge!.color,
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          surfaceTintColor: Colors.transparent,
-                          padding: const EdgeInsets.all(16),
-                          //no shape
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(0),
-                            ),
+                Text(
+                  "Browse to add a book in your history",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          )
+        : ScrollConfiguration(
+            behavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            child: ListView.builder(
+              itemCount: bookViewsGroupedByDate.length,
+              itemBuilder: (context, index) {
+                final date = bookViewsGroupedByDate.keys.elementAt(index);
+                final bookViews = bookViewsGroupedByDate[date];
+
+                return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Text(
+                          DateFormat('dd/MM/yyyy').format(date),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        onPressed: () => viewBook(bookView.book),
-                        child: Row(
-                          children: [
-                            Card(
-                              margin: const EdgeInsets.all(0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.network(
-                                    height: 90,
-                                    width: 60,
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png"),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
+                      ),
+                      ...bookViews!
+                          .map(
+                            (bookView) => ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .color,
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                surfaceTintColor: Colors.transparent,
                                 padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      bookView.book.title ?? "Missing title",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      bookView.book.author ?? "Missing author",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ],
+                                //no shape
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(0),
+                                  ),
                                 ),
                               ),
+                              onPressed: () => viewBook(bookView.book),
+                              child: Row(
+                                children: [
+                                  Card(
+                                    margin: const EdgeInsets.all(0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.network(
+                                          height: 90,
+                                          width: 60,
+                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Libgen_logo.svg/1200px-Libgen_logo.svg.png"),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            bookView.book.title ??
+                                                "Missing title",
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            bookView.book.author ??
+                                                "Missing author",
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () =>
+                                        removeBookView(bookView.book),
+                                    icon: const Icon(Icons.delete_outline),
+                                  )
+                                ],
+                              ),
                             ),
-                            IconButton(
-                              onPressed: () => removeBookView(bookView.book),
-                              icon: const Icon(Icons.delete_outline),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ]);
-        },
-      ),
-    );
+                          )
+                          .toList(),
+                    ]);
+              },
+            ),
+          );
   }
 }
