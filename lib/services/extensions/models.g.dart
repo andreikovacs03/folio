@@ -72,23 +72,32 @@ Filters _$FiltersFromJson(Map<String, dynamic> json) => Filters(
       edit: json['Edit'] as String?,
     );
 
-Map<String, dynamic> _$FiltersToJson(Filters instance) => <String, dynamic>{
-      'ID': instance.id,
-      'Author': instance.author,
-      'Title': instance.title,
-      'Publisher': instance.publisher,
-      'Year': instance.year,
-      'Pages': instance.pages,
-      'Language': instance.language,
-      'Size': instance.size,
-      'Extension': instance.extension,
-      'Mirror_1': instance.mirror_1,
-      'Mirror_2': instance.mirror_2,
-      'Mirror_3': instance.mirror_3,
-      'Mirror_4': instance.mirror_4,
-      'Mirror_5': instance.mirror_5,
-      'Edit': instance.edit,
-    };
+Map<String, dynamic> _$FiltersToJson(Filters instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('ID', instance.id);
+  writeNotNull('Author', instance.author);
+  writeNotNull('Title', instance.title);
+  writeNotNull('Publisher', instance.publisher);
+  writeNotNull('Year', instance.year);
+  writeNotNull('Pages', instance.pages);
+  writeNotNull('Language', instance.language);
+  writeNotNull('Size', instance.size);
+  writeNotNull('Extension', instance.extension);
+  writeNotNull('Mirror_1', instance.mirror_1);
+  writeNotNull('Mirror_2', instance.mirror_2);
+  writeNotNull('Mirror_3', instance.mirror_3);
+  writeNotNull('Mirror_4', instance.mirror_4);
+  writeNotNull('Mirror_5', instance.mirror_5);
+  writeNotNull('Edit', instance.edit);
+  return val;
+}
 
 BookView _$BookViewFromJson(Map<String, dynamic> json) => BookView(
       book: Book.fromJson(json['Book'] as Map<String, dynamic>),

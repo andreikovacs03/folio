@@ -56,7 +56,7 @@ class Book {
   Map<String, dynamic> toJson() => _$BookToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.pascal)
+@JsonSerializable(fieldRename: FieldRename.pascal, includeIfNull: false)
 class Filters {
   @JsonKey(name: 'ID')
   final String? id;

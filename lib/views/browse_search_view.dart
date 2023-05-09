@@ -28,7 +28,8 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
 
     final libgenApi = LibgenAPI(Dio());
     try {
-      final books = await libgenApi.searchTitle(value);
+      final books = await libgenApi.searchTitleFiltered(
+          value, const Filters(extension: "pdf"));
       setState(() {
         this.books = books;
         isLoading = false;
