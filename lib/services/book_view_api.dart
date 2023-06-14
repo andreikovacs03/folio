@@ -55,9 +55,17 @@ class BookViewAPI {
 
   Map<DateTime, List<BookView>> getBookViewsGroupedByDate() {
     final bookViews = getBookViews();
-    return groupBy(
+
+    final bookViewsGroupedByDate = groupBy(
         bookViews,
         (bookView) => DateTime(
             bookView.date.year, bookView.date.month, bookView.date.day));
+
+    // Sort by key (date)
+    final sortedBookViewsGroupedByDate = Map.fromEntries(
+        bookViewsGroupedByDate.entries.toList()
+          ..sort((a, b) => b.key.compareTo(a.key)));
+
+    return sortedBookViewsGroupedByDate;
   }
 }
