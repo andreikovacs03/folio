@@ -19,6 +19,22 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
   bool isLoading = false;
   List<Book>? books;
   late AnimationController controller;
+  final _controller = TextEditingController();
+  late FocusNode searchFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    searchFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    searchFocusNode.dispose();
+
+    super.dispose();
+  }
 
   Future<void> _onSubmitted(String value) async {
     setState(() {
@@ -56,6 +72,8 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
           ),
           title: TextField(
             autofocus: true,
+            controller: _controller,
+            focusNode: searchFocusNode,
             decoration: const InputDecoration(
               hintText: 'Search',
               border: InputBorder.none,
@@ -67,7 +85,11 @@ class _BrowseSearchViewState extends State<BrowseSearchView>
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 icon: const Icon(Icons.clear),
-                onPressed: () => setState(() => title = ""),
+                onPressed: () {
+                  _controller.clear();
+                  searchFocusNode.requestFocus();
+                  setState(() => title = "");
+                },
               ),
             ),
           ],
