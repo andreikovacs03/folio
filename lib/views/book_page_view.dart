@@ -143,7 +143,11 @@ class _BookPageViewState extends State<BookPageView> {
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              foreground: Paint()..color = Colors.white70,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .color!
+                                  .withOpacity(0.7),
                             ),
                           ),
                         ],
